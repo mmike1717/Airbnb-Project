@@ -27,7 +27,8 @@ const validateLogin = [
 router.post('/', validateLogin, async (req, res, next) => {
       const { credential, password } = req.body;
 
-      const user = await User.unscoped().findOne({
+      const user = await User.scope().findOne({
+        attributes: [['firstName'], ['lastName'], ['email'], ['userName']],
         where: {
           [Op.or]: {
             username: credential,
@@ -46,6 +47,8 @@ router.post('/', validateLogin, async (req, res, next) => {
 
       const safeUser = {
         id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: user.email,
         username: user.username,
       };
@@ -76,6 +79,8 @@ router.get('/', (req, res) => {
       if (user) {
         const safeUser = {
           id: user.id,
+          firstName: user.firstName,
+          lastName: user.lastName,
           email: user.email,
           username: user.username,
         };

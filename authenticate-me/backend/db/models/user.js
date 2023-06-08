@@ -8,13 +8,39 @@ module.exports = (sequelize, DataTypes) => {
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
+    */
+   static associate(models) {
+     // define association here
     }
   }
   User.init(
     {
+      firstName:{
+        type: DataTypes.STRING(30),
+        allowNull: false,
+        validate: {
+          len: [2, 30],
+          isAlpha: true,
+          isNotEmail(value) {
+            if (Validator.isEmail(value)) {
+              throw new Error("Cannot be an email.");
+            }
+          }
+          }
+        },
+        lastName:{
+          type: DataTypes.STRING(30),
+          allowNull: false,
+          validate: {
+            len: [2, 30],
+            isAlpha: true,
+            isNotEmail(value) {
+              if (Validator.isEmail(value)) {
+                throw new Error("Cannot be an email.");
+              }
+            }
+          }
+        },
       username: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -41,7 +67,7 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           len: [60, 60]
         }
-      }
+      },
     }, {
       sequelize,
       modelName: 'User',
