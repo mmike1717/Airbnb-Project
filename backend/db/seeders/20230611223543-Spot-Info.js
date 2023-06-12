@@ -1,12 +1,12 @@
 'use strict';
 
+/** @type {import('sequelize-cli').Migration} */
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
 
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
     options.tableName = 'Spots';
@@ -70,7 +70,7 @@ module.exports = {
     options.tableName = 'Spots';
     const Op = Sequelize.Op;
 
-    await queryInterface.bulkDelete('Spots', {
+    await queryInterface.bulkDelete(options, {
       address: { [Op.in]: ['123 Disney Lane','456 Florida Disney','678 Disney East','234 Universal Ave']}
     }, {})
   }
