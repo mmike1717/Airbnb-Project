@@ -89,7 +89,7 @@ router.get('/current', async (req, res) => {
     const userId = req.user.dataValues.id
     const spots = await Spot.findAll({
         where: {
-                ownerId: userId
+                ownerId: req.user.dataValues.id
                 },
         include: {
             model: Review,
