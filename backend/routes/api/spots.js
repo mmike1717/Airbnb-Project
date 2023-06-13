@@ -195,6 +195,43 @@ router.post('/', requireAuth, createSpotChecker, async (req,res) => {
 
 
 
+router.post('/:spotId/images', requireAuth, async (req, res) => {
+    const user = req.user.dataValues.id
+    const spot = await Spot.findByPk(req.params.spotId, {
+        include: {
+            model: SpotImage,
+
+        }
+    })
+
+    let {url, preview} = req.body
+
+    if(spot.ownerId === user){
+        let addImage = await SpotImage.create({
+            spotId: req.params.spotId,
+            url,
+            preview
+        })
+
+
+        res.json({
+            id: addImage.id,
+            url: addImage.url,
+            preview: addImage.preview
+        })
+    } else {
+        res.status(404)
+        return res.json({
+            message: "Spot couldn't be found"
+        })
+    }
+})
+
+
+
+
+
+
 
 
 
