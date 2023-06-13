@@ -21,7 +21,7 @@ const createSpotChecker = (req, res, next) => {
     if(!country) errors.country ='Country is required';
     if(!lat) errors.lat ='Latitude is not valid';
     if(!lng) errors.lng ='Longitude is not valid';
-    if(name.length > 50) errors.name='Name must be less than 50 characters';
+    if(!name || name.length > 50) errors.name='Name must be less than 50 characters';
     if(!description) errors.description='Description is required';
     if(!price) errors.price ='Price per day is required';
 
