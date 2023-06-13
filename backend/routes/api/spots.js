@@ -65,40 +65,52 @@ router.get('/current', async (req, res) => {
 
 
 router.get('/:spotId', async (req, res) => {
-    const spot = await Spot.findByPk(req.params.spotId, {
+    const id = req.params.spotId
+    const spot = await Spot.findByPk(id, {
         // include: [Review, {model:SpotImage, attributes: ['id','url', 'preview']}, {model: User, attributes: ['id', 'firstName', 'lastName']}]
     })
 
-    let reviews = await Review.findAll({
-        where: {
-            spotId: req.params.spotId
-        }
-    })
+    if(spot){
+        let reviews = await Review.findAll({
+            where: {
+                spotId: id
+            }
+        })
 
-    let numReviews = reviews.length
-    let totalStars = 0
-    let starRating = reviews.map((review) => {
-        totalStars += review.stars
-    })
-    let avgStarRating = totalStars / numReviews
+        let numReviews = reviews.length
+        let totalStars = 0
+        let starRating = reviews.map((review) => {
+            totalStars += review.stars
+        })
+        let avgStarRating = totalStars / numReviews
 
-    let SpotImages = await SpotImage.findAll({
-        where: {
-            spotId: req.params.spotId
-        },
-        attributes: ['id', 'url', 'preview']
-    })
+        let SpotImages = await SpotImage.findAll({
+            where: {
+                spotId: id
+            },
+            attributes: ['id', 'url', 'preview']
+        })
 
 
-    let Owner = await User.findAll({
-        where: {id: spot.ownerId},
-        attributes: ['id', 'firstName', 'lastName']
-    })
+        let Owner = await User.findAll({
+            where: {id: spot.ownerId},
+            attributes: ['id', 'firstName', 'lastName']
+        })
 
-    res.json({...spot.toJSON(), numReviews, avgStarRating, SpotImages, Owner})
+        res.json({...spot.toJSON(), numReviews, avgStarRating, SpotImages, Owner})
+    } else {
+        res.status(404)
+        return res.json({
+            message: "Spot couldn't be found"
+        })
+    }
 })
 
 
+
+router.post('/', async (req,res) => {
+
+})
 
 
 
