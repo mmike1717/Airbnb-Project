@@ -177,6 +177,7 @@ router.post('/', createSpotChecker, async (req,res) => {
     const {address, city, state, country, lat, lng, name, description, price} = req.body
 
     const spot = await Spot.create({
+        ownerId: req.user.dataValues.id,
         address,
         city,
         state,
