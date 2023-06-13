@@ -27,8 +27,8 @@ const validateLogin = [
 router.post('/', validateLogin, async (req, res, next) => {
       const { credential, password } = req.body;
 
-      const user = await User.scope().findOne({
-        attributes: [['firstName'], ['lastName'], ['email'], ['userName']],
+      const user = await User.unscoped().findOne({
+
         where: {
           [Op.or]: {
             username: credential,
