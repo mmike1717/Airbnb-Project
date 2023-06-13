@@ -86,7 +86,6 @@ router.get('/', async (req, res) => {
 
 
 router.get('/current', async (req, res) => {
-    const userId = req.user.dataValues.id
     const spots = await Spot.findAll({
         where: {
                 ownerId: req.user.dataValues.id
