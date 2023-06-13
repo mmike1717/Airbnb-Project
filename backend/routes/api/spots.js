@@ -1,42 +1,40 @@
 const express = require('express');
 
 const { Op } = require('sequelize');
-const { handleValidationErrors } = require('../../utils/validation');
+const { requireAuth } = require('../../utils/auth');
+
+// const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 const {Spot, SpotImage, Review, User} = require('../../db/models')
 
 
-// const validatePost = [
-//     check('address')
-//     .exists({ checkFalsy: true })
-//     .withMessage('Street address is required'),
-//     check('city')
-//     .exists({ checkFalsy: true })
-//     .withMessage('City is required'),
-//     check('state')
-//     .exists({ checkFalsy: true })
-//     .withMessage('State is required'),
-//     check('country')
-//     .exists({ checkFalsy: true })
-//     .withMessage('Country is required'),
-//     check('lat')
-//     .exists({ checkFalsy: true })
-//     .withMessage('Latitude is not valid'),
-//     check('lng')
-//     .exists({ checkFalsy: true })
-//     .withMessage('Longitude is not valid'),
-//     check('name')
-//     .exists({ checkFalsy: true })
-//     .withMessage('Name must be less than 50 characters'),
-//     check('description')
-//     .exists({ checkFalsy: true })
-//     .withMessage('Description is required'),
-//     check('description')
-//     .exists({ checkFalsy: true })
-//     .withMessage('Price per day is required'),
-//     handleValidationErrors
-// ];
+
+const createSpotChecker = (req, res, next) => {
+    const {address, city, state, country, lat, lng, name, description, price} = req.body
+
+    const errors = {}
+
+    if(!address) errors.address = 'Street address is required';
+    if(!city)errors.city = 'City is required';
+    if(!state) errors.state ='State is required';
+    if(!country) errors.country ='Country is required';
+    if(!lat) errors.lat ='Latitude is not valid';
+    if(!lng) errors.lng ='Longitude is not valid';
+    if(name.length > 50) errors.name='Name must be less than 50 characters';
+    if(!description) errors.description='Description is required';
+    if(!price) errors.price ='Price per day is required';
+
+    if(Object.keys(errors).length){
+        res.status(400)
+        return res.json({
+            message: 'Bad Request',
+            errors
+        })
+    }
+
+    next()
+};
 
 
 
@@ -175,8 +173,22 @@ router.get('/:spotId', async (req, res) => {
 
 
 
-router.post('/', async (req,res) => {
+router.post('/', createSpotChecker, async (req,res) => {
+    const {address, city, state, country, lat, lng, name, description, price} = req.body
 
+    const spot = await Spot.create({
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price
+    })
+
+    res.json(spot)
 })
 
 
