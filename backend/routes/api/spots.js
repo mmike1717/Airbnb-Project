@@ -173,7 +173,7 @@ router.get('/:spotId', async (req, res) => {
 
 
 
-router.post('/', createSpotChecker, async (req,res) => {
+router.post('/', requireAuth, createSpotChecker, async (req,res) => {
     const {address, city, state, country, lat, lng, name, description, price} = req.body
 
     const spot = await Spot.create({
