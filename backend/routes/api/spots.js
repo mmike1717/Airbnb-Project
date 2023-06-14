@@ -65,9 +65,6 @@ router.get('/', async (req, res) => {
             model:Review,
             attributes: ['stars']
         }
-
-
-
     })
 
     const previews = await SpotImage.findAll()
