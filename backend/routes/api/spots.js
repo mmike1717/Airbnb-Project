@@ -42,11 +42,14 @@ router.get('/', async (req, res) => {
 
     const spots = await Spot.findAll({
         include: {
-            model: Review,
+            model:Review,
             attributes: ['stars']
         }
 
+
+
     })
+
     const previews = await SpotImage.findAll()
     // const reviews = await Review.findAll()
 
@@ -60,11 +63,13 @@ router.get('/', async (req, res) => {
 
 
 
+
         let previewImageObj = previews.find((preview) => {
             return preview.spotId === spot.id
         })
-        previewImageObj = previewImageObj.toJSON()
-        const previewImage = previewImageObj.preview ? previewImageObj.url : null;
+
+        const previewImage = previewImageObj ? previewImageObj.toJSON().preview ? previewImageObj.toJSON().url : null :null
+
 
         const spotObj = spot.toJSON()
         delete spotObj.Reviews
@@ -109,8 +114,8 @@ router.get('/current', async (req, res) => {
         let previewImageObj = previews.find((preview) => {
             return preview.spotId === spot.id
         })
-        previewImageObj = previewImageObj.toJSON()
-        const previewImage = previewImageObj.preview ? previewImageObj.url : null;
+
+        const previewImage = previewImageObj ? previewImageObj.toJSON().preview ? previewImageObj.toJSON().url : null :null
 
         const spotObj = spot.toJSON()
         delete spotObj.Reviews
@@ -259,6 +264,22 @@ router.put('/:spotId', requireAuth, createSpotChecker, async (req, res) => {
 })
 
 
+
+router.delete('/:spotId', requireAuth, async (req, res) => {
+    const deleteSpot = await Spot.findByPk(req.params.spotId)
+
+    if(!deleteSpot || deleteSpot.ownerId !== req.user.dataValues.id){
+        res.status(404)
+        return res.json({
+            message: "Spot couldn't be found"
+        })
+    }
+    if( deleteSpot && deleteSpot.ownerId === req.user.dataValues.id){
+        await deleteSpot.destroy()
+
+        res.json({message: "Successfully deleted"})
+    }
+})
 
 
 module.exports = router;
