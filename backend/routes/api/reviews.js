@@ -7,6 +7,25 @@ const router = express.Router();
 const {Spot, SpotImage, Review, User, ReviewImage} = require('../../db/models')
 
 
+const addImageChecker = (req, res, next) => {
+    let errors = {}
+
+    const {url} = req.body
+
+    if(!url) errors.url = "Image not added"
+
+    if(Object.keys(errors).length){
+        res.status(400)
+        return res.json({
+            message: 'Bad Request',
+            errors
+        })
+    }
+
+    next()
+}
+
+
 
 router.get('/current', requireAuth, async (req, res) => {
     const currUser = req.user.dataValues.id
@@ -45,9 +64,40 @@ router.get('/current', requireAuth, async (req, res) => {
 
 
 
-router.post('/:reviewId/images', requireAuth, async (req, res) => {
+router.post('/:reviewId/images', requireAuth, addImageChecker, async (req, res) => {
+    const review = await Review.findByPk(req.params.reviewId, {
+        include:[ReviewImage]
+
+    })
+    if(!review || review.userId !== req.user.dataValues.id){
+        res.status(403)
+        return res.json({
+            message: "Review couldn't be found"
+        })
+    }
+
+    if(review.ReviewImages.length > 11){
+        res.status(404)
+        return res.json({
+            message: "Maximum number of images for this resource was reached"
+        })
+    }
+
+    else if (review && review.userId === req.user.dataValues.id){
+        const {url} = req.body;
+        const newImage = await ReviewImage.create({
+            reviewId: req.params.reviewId,
+            url
+        })
+
+        res.json({id: newImage.id, url: newImage.url})
+    }
 
 })
+
+
+
+
 
 
 
