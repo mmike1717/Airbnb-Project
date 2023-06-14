@@ -37,6 +37,26 @@ const createSpotChecker = (req, res, next) => {
 };
 
 
+const createReviewChecker = (req, res, next) => {
+    const {review, stars} = req.body;
+
+    const errors = {};
+
+    if(!review) errors.review = "Review text is required";
+    if(!stars || Number.isNaN(stars) || stars < 1 || stars > 6) errors.stars = "Stars must be an integer from 1 to 5";
+
+    if(Object.keys(errors).length){
+        res.status(400)
+        return res.json({
+            message: 'Bad Request',
+            errors
+        })
+    }
+
+    next()
+
+}
+
 
 router.get('/', async (req, res) => {
 
@@ -248,6 +268,52 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
             preview: addImage.preview
         })
     } else {
+        res.status(404)
+        return res.json({
+            message: "Spot couldn't be found"
+        })
+    }
+})
+
+
+
+router.post('/:spotId/reviews', requireAuth, createReviewChecker, async(req, res) => {
+    const spot = await Spot.findByPk(req.params.spotId, {
+        include: {
+            model: Review,
+
+        }
+    })
+
+    if(spot){
+
+        let {review, stars} = req.body
+
+        let allReviews = await Review.findAll()
+
+        let reviewsMade = allReviews.find((review) => {
+        return review.userId === req.user.dataValues.id && spot.id === review.spotId
+        })
+
+        if(reviewsMade){
+            res.status(500)
+            return res.json({
+                message: "User already has a review for this spot"
+            })
+        }
+
+        if(!reviewsMade){
+            let newReview = await Review.create({
+                spotId: spot.id,
+                userId: req.user.dataValues.id,
+                review,
+                stars
+            })
+
+            res.json(newReview)
+        }
+    }
+    else {
         res.status(404)
         return res.json({
             message: "Spot couldn't be found"
