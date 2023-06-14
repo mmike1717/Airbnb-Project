@@ -293,7 +293,7 @@ router.post('/:spotId/reviews', requireAuth, createReviewChecker, async(req, res
         })
 
         if(reviewsMade){
-            res.status(500)
+            res.status(403)
             return res.json({
                 message: "User already has a review for this spot"
             })
