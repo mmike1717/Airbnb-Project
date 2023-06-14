@@ -345,6 +345,8 @@ router.put('/:spotId', requireAuth, createSpotChecker, async (req, res) => {
             price
         })
 
+        await editSpot.save()
+
         res.json(editSpot)
     }
 })

@@ -26,6 +26,26 @@ const addImageChecker = (req, res, next) => {
 }
 
 
+const editReviewChecker = (req, res, next) => {
+    let errors = {}
+
+    const {review, stars} = req.body
+
+    if(!review) errors.review = "Review text is required";
+    if(!stars || stars < 1 || stars > 6) errors.stars = "Stars must be an integer from 1 to 5"
+
+    if(Object.keys(errors).length){
+        res.status(400)
+        return res.json({
+            message: 'Bad Request',
+            errors
+        })
+    }
+
+    next()
+}
+
+
 
 router.get('/current', requireAuth, async (req, res) => {
     const currUser = req.user.dataValues.id
@@ -96,6 +116,31 @@ router.post('/:reviewId/images', requireAuth, addImageChecker, async (req, res) 
 })
 
 
+
+router.put('/:reviewId', requireAuth, editReviewChecker, async(req, res) => {
+    const editReview = await Review.findByPk(req.params.reviewId)
+    const {review, stars} = req.body
+
+    if(editReview && editReview.userId === req.user.dataValues.id){
+        const editingRev = await editReview.set({
+            spotId: editReview.spotId,
+            userId: req.user.dataValues.id,
+            review,
+            stars
+        })
+
+        await editingRev.save()
+
+        res.json( editingRev)
+
+    } else{
+        res.status(404)
+        return res.json({
+            message: "Review couldn't be found"
+        })
+    }
+
+})
 
 
 
