@@ -230,7 +230,33 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
 
 
 
+router.put('/:spotId', requireAuth, createSpotChecker, async (req, res) => {
+    const spot = await Spot.findByPk(req.params.spotId)
 
+    const {address, city, state, country, lat, lng, name, description, price} = req.body
+
+    if(!spot || spot.ownerId !== req.user.dataValues.id){
+        res.status(404)
+        return res.json({
+            message: "Spot couldn't be found"
+        })
+    }
+    if(spot && spot.ownerId === req.user.dataValues.id){
+        let editSpot = await spot.set({
+            address,
+            city,
+            state,
+            country,
+            lat,
+            lng,
+            name,
+            description,
+            price
+        })
+
+        res.json(editSpot)
+    }
+})
 
 
 
