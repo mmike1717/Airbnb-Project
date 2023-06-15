@@ -9,6 +9,9 @@ const {Spot, SpotImage, Review, User, ReviewImage, Booking} = require('../../db/
 
 router.get('/current', requireAuth, async (req, res) => {
     const allBookings = await Booking.findAll({
+        where: {
+            userId: req.user.dataValues.id
+        },
         include: {
             model: Spot,
             attributes: {
