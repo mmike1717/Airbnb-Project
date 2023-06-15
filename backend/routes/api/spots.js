@@ -82,10 +82,10 @@ router.get('/', async (req, res) => {
 
 
         let previewImageObj = previews.find((preview) => {
-            return preview.spotId === spot.id
+            return preview.spotId === spot.id && preview.preview
         })
 
-        const previewImage = previewImageObj ? previewImageObj.toJSON().preview ? previewImageObj.toJSON().url : null :null
+        const previewImage = previewImageObj ? previewImageObj.toJSON().url : null
 
 
         const spotObj = spot.toJSON()
@@ -129,10 +129,11 @@ router.get('/current', async (req, res) => {
 
 
         let previewImageObj = previews.find((preview) => {
-            return preview.spotId === spot.id
+            return preview.spotId === spot.id && preview.preview
         })
 
-        const previewImage = previewImageObj ? previewImageObj.toJSON().preview ? previewImageObj.toJSON().url : null :null
+        // const previewImage = previewImageObj ? previewImageObj.toJSON().preview ? previewImageObj.toJSON().url : null :null
+        const previewImage = previewImageObj ? previewImageObj.toJSON().url : null
 
         const spotObj = spot.toJSON()
         delete spotObj.Reviews
