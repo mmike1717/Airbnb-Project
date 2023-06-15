@@ -175,7 +175,6 @@ router.get('/:spotId/reviews', async (req, res) => {
 
 
 router.get('/:spotId/bookings', requireAuth, async (req, res) => {
-    const spot = await Spot.findByPk(req.params.spotId)
 
     const allBookings = await Booking.findAll({
         where:{
@@ -201,7 +200,6 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
         res.json({Bookings: Bookings})
     }
 
-    // res.json(allBookings)
 })
 
 
