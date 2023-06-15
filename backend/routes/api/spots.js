@@ -9,6 +9,25 @@ const router = express.Router();
 const {Spot, SpotImage, Review, User, ReviewImage, Booking} = require('../../db/models')
 
 
+const getAllChecker = (req, res, next) => {
+    const { page, size } = req.query
+
+    const errors = {}
+
+    if (!page) errors.page  = "Page must be greater than or equal to 1"
+    if (!size) errors.size = "Size must be greater than or equal to 1"
+
+    if(Object.keys(errors).length){
+        res.status(400)
+        return res.json({
+            message: 'Bad Request',
+            errors
+        })
+    }
+
+    next()
+}
+
 
 const createSpotChecker = (req, res, next) => {
     const {address, city, state, country, lat, lng, name, description, price} = req.body
@@ -58,13 +77,21 @@ const createReviewChecker = (req, res, next) => {
 }
 
 
-router.get('/', async (req, res) => {
+router.get('/', getAllChecker, async (req, res) => {
+    const {page, size} = req.query
+    let pagination = {}
+
+    if (page >= 1 && size >= 1) {
+        pagination.limit = size
+        pagination.offset = ( page - 1 ) * size
+    }
 
     const spots = await Spot.findAll({
         include: {
             model:Review,
             attributes: ['stars']
-        }
+        },
+        ...pagination
     })
 
     const previews = await SpotImage.findAll()
@@ -76,8 +103,9 @@ router.get('/', async (req, res) => {
         const avgRatingArr = spot.Reviews.map((review) => {
             totalStars += review.stars
         })
-        let avgRating = avgRatingArr.length > 0 ? totalStars / avgRatingArr.length : null
-
+        let avgRating1 = avgRatingArr.length > 0 ? totalStars / avgRatingArr.length : null
+        // let avgRating = Number.parseFloat(avgRating1).toFixed(1)
+        let avgRating = Math.round(avgRating1 * 100)/100
 
 
 
@@ -91,6 +119,7 @@ router.get('/', async (req, res) => {
         const spotObj = spot.toJSON()
         delete spotObj.Reviews
 
+
         return {
             ...spotObj,
             avgRating,
@@ -99,7 +128,9 @@ router.get('/', async (req, res) => {
     })
 
     res.json({
-        spots: allSpots
+        spots: allSpots,
+        page,
+        size
     })
 
 });
@@ -124,7 +155,8 @@ router.get('/current', async (req, res) => {
         const avgRatingArr = spot.Reviews.map((review) => {
             totalStars += review.stars
         })
-        let avgRating = avgRatingArr.length > 0 ? totalStars / avgRatingArr.length : null
+        let avgRating1 = avgRatingArr.length > 0 ? totalStars / avgRatingArr.length : null
+        let avgRating = Math.round(avgRating1 * 100)/100
 
 
 

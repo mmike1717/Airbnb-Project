@@ -36,27 +36,57 @@ router.get('/current', requireAuth, async (req, res) => {
             model: Spot,
             attributes: {
                 exclude: ['description', 'createdAt', 'updatedAt']
-            }
+            },
+            include: [SpotImage]
         }
     })
 
-    res.json({Bookings: allBookings})
+    let previewImg = [];
+
+    allBookings.forEach((eachBooking) => {
+        eachBooking = eachBooking.toJSON()
+        let spotImages = eachBooking.Spot.SpotImages
+        for(let eachImage of spotImages){
+            if(eachImage.preview){
+                eachBooking.Spot.previewImage = eachImage.url
+                break
+            }
+
+            eachBooking.Spot.previewImage = null;
+        }
+        delete eachBooking.Spot.SpotImages
+        previewImg.push(eachBooking)
+    })
+
+
+
+    res.json({Bookings: previewImg})
 })
 
 
 
 router.delete('/:bookingId', requireAuth, async (req, res) => {
     const deleteBooking = await Booking.findByPk(req.params.bookingId)
+    let currUser = req.user.dataValues.id
 
-    if(!deleteBooking){
+    if(!deleteBooking || deleteBooking.userId !== currUser){
         res.status(404)
         return res.json({
             message: "Booking couldn't be found"
         })
     }
-    if(true){}
+    let usersStartDate = new Date(deleteBooking.startDate)
+    let usersEndDate = new Date(deleteBooking.endDate)
+    let today = new Date()
 
-    if(deleteBooking.userId === req.user.dataValues.id){
+    if(usersStartDate <= today && usersEndDate >= today){
+        res.status(403)
+        return res.json({
+            message: "Bookings that have been started can't be deleted"
+        })
+    }
+
+    if(deleteBooking.userId === currUser){
         await deleteBooking.destroy()
         res.json({"message": "Successfully deleted"})
     }
