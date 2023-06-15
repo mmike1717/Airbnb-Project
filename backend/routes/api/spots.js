@@ -6,7 +6,7 @@ const { requireAuth } = require('../../utils/auth');
 // const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
-const {Spot, SpotImage, Review, User, ReviewImage} = require('../../db/models')
+const {Spot, SpotImage, Review, User, ReviewImage, Booking} = require('../../db/models')
 
 
 
@@ -177,7 +177,31 @@ router.get('/:spotId/reviews', async (req, res) => {
 router.get('/:spotId/bookings', requireAuth, async (req, res) => {
     const spot = await Spot.findByPk(req.params.spotId)
 
+    const allBookings = await Booking.findAll({
+        where:{
+            spotId: req.params.spotId
+        },
+        include: {model: User, attributes: ['id', 'firstName', 'lastName']}
+    })
 
+    console.log(allBookings)
+    if(allBookings.length === 0){
+        res.status(404)
+        return res.json({
+            message: "Spot couldn't be found"
+        })
+    } else {
+        let Bookings = allBookings.map((bookings) => {
+            let booking = bookings.toJSON()
+
+            return booking.userId !== req.user.dataValues.id ? {spotId: booking.spotId, startDate: booking.startDate, endDate: booking.endDate} : booking
+
+        })
+
+        res.json({Bookings: Bookings})
+    }
+
+    // res.json(allBookings)
 })
 
 
