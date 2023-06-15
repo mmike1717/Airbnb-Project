@@ -183,7 +183,6 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
         include: {model: User, attributes: ['id', 'firstName', 'lastName']}
     })
 
-    console.log(allBookings)
     if(allBookings.length === 0){
         res.status(404)
         return res.json({
@@ -266,6 +265,59 @@ router.post('/', requireAuth, createSpotChecker, async (req,res) => {
     res.json(spot)
 })
 
+
+router.post('/:spotId/bookings', requireAuth, async (req, res) => {
+    const spot = await Spot.findByPk(req.params.spotId,{
+        include: [Booking]
+    })
+
+    const { startDate, endDate } = req.body
+
+    if(!spot){
+        res.status(404)
+        return res.json({
+            message: "Spot couldn't be found"
+        })
+    }
+    if(startDate >= endDate){
+        res.status(400)
+        return res.json({
+            message: "Bad Request",
+            errors: {endDate: "endDate cannot be on or before startDate"}
+        })
+    }
+
+    let errors = {}
+    let bookings = spot.Bookings
+    bookings.forEach((booking) => {
+        let eachBooking = booking.toJSON()
+        if(eachBooking.startDate <= startDate && eachBooking.endDate >= startDate){
+            errors.startDate = "Start date conflicts with an existing booking"
+        }
+        if(eachBooking.startDate <= endDate && eachBooking.endDate >= endDate){
+            errors.endDate = "End date conflicts with an existing booking"
+        }
+    })
+
+    if(Object.keys(errors).length){
+        res.status(403)
+        return res.json({
+            message: "Sorry, this spot is already booked for the specified dates",
+            errors
+        })
+    }
+    else{
+        const newBooking = await Booking.create({
+            spotId: spot.id,
+            userId: req.user.dataValues.id,
+            startDate,
+            endDate
+        })
+
+        res.json(newBooking)
+    }
+
+})
 
 
 
