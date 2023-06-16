@@ -311,12 +311,6 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
 
     const { startDate, endDate } = req.body
 
-    if(!spot){
-        res.status(404)
-        return res.json({
-            message: "Spot couldn't be found"
-        })
-    }
     if(startDate >= endDate){
         res.status(400)
         return res.json({
@@ -344,7 +338,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
             errors
         })
     }
-    else{
+    if(spot && spot.userId !== req.user.dataValues.id){
         const newBooking = await Booking.create({
             spotId: spot.id,
             userId: req.user.dataValues.id,
@@ -354,6 +348,11 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
 
         res.json(newBooking)
     }
+
+    res.status(404)
+        return res.json({
+            message: "Spot couldn't be found"
+        })
 
 })
 
