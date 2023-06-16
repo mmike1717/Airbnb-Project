@@ -227,10 +227,11 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
             message: "Spot couldn't be found"
         })
     } else {
+        const spot = await Spot.findByPk(req.params.spotId)
         let Bookings = allBookings.map((bookings) => {
             let booking = bookings.toJSON()
 
-            return booking.userId !== req.user.dataValues.id ? {spotId: booking.spotId, startDate: booking.startDate, endDate: booking.endDate} : booking
+            return spot.ownerId !== req.user.dataValues.id ? {spotId: booking.spotId, startDate: booking.startDate, endDate: booking.endDate} : booking
 
         })
 
