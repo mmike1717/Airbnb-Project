@@ -66,7 +66,9 @@ router.get('/current', requireAuth, async (req, res) => {
 
 
 router.delete('/:bookingId', requireAuth, async (req, res) => {
-    const deleteBooking = await Booking.findByPk(req.params.bookingId)
+    const deleteBooking = await Booking.findByPk(req.params.bookingId, {
+        include: [Spot]
+    })
     let currUser = req.user.dataValues.id
 
     if(!deleteBooking || deleteBooking.userId !== currUser){
@@ -86,7 +88,7 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
         })
     }
 
-    if(deleteBooking.userId === currUser){
+    if(deleteBooking.userId === currUser || currUser === deleteBooking.Spot.ownerId){
         await deleteBooking.destroy()
         res.json({"message": "Successfully deleted"})
     }
