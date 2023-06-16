@@ -14,8 +14,8 @@ const getAllChecker = (req, res, next) => {
 
     const errors = {}
 
-    if (!page) errors.page  = "Page must be greater than or equal to 1"
-    if (!size) errors.size = "Size must be greater than or equal to 1"
+    if (page < 1) errors.page  = "Page must be greater than or equal to 1"
+    if (size < 1) errors.size = "Size must be greater than or equal to 1"
 
     if(Object.keys(errors).length){
         res.status(400)
@@ -80,6 +80,9 @@ const createReviewChecker = (req, res, next) => {
 router.get('/', getAllChecker, async (req, res) => {
     const {page, size} = req.query
     let pagination = {}
+
+    if(!page || page > 10) page = 1;
+    if(!size || size > 20) size = 20;
 
     if (page >= 1 && size >= 1) {
         pagination.limit = size
