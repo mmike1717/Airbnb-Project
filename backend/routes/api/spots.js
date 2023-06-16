@@ -370,7 +370,7 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
 
     let {url, preview} = req.body
 
-    if(spot.ownerId === user){
+    if(spot && spot.ownerId === user){
         let addImage = await SpotImage.create({
             spotId: req.params.spotId,
             url,
