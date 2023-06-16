@@ -78,10 +78,12 @@ const createReviewChecker = (req, res, next) => {
 
 
 router.get('/', getAllChecker, async (req, res) => {
-    const {page, size} = req.query
+    let {page, size} = req.query
     let pagination = {}
 
-    if(!page || page > 10) page = 1;
+    console.log(page)
+    if(!page) page = 1
+    if(page > 10) page = 1;
     if(!size || size > 20) size = 20;
 
     if (page >= 1 && size >= 1) {
