@@ -98,7 +98,7 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
 
 router.put('/:bookingId', requireAuth, editingBookingChecker, async (req, res) => {
     const booking = await Booking.findByPk(req.params.bookingId)
-    if(!booking){
+    if(!booking) {
         res.status(404)
         return res.json({
             message: "Booking couldn't be found"
@@ -110,13 +110,6 @@ router.put('/:bookingId', requireAuth, editingBookingChecker, async (req, res) =
         },
         include: [Booking]
     })
-
-    if(!spot){
-        res.status(404)
-        return res.json({
-            message: "Booking couldn't be found"
-        })
-    }
 
     const currUser = req.user.dataValues.id
     const {startDate, endDate} = req.body
@@ -134,10 +127,10 @@ router.put('/:bookingId', requireAuth, editingBookingChecker, async (req, res) =
     let bookings = spot.Bookings
     bookings.forEach((booking) => {
         let eachBooking = booking.toJSON()
-        if(eachBooking.startDate <= startDate || eachBooking.endDate >= startDate || booking.userId !== currUser){
+        if(eachBooking.startDate <= startDate && eachBooking.endDate >= startDate){
             errors.startDate = "Start date conflicts with an existing booking"
         }
-        if(eachBooking.startDate <= endDate || eachBooking.endDate >= endDate || booking.userId !== currUser){
+        if(eachBooking.startDate <= endDate && eachBooking.endDate >= endDate){
             errors.endDate = "End date conflicts with an existing booking"
         }
     })
@@ -150,8 +143,8 @@ router.put('/:bookingId', requireAuth, editingBookingChecker, async (req, res) =
         })
     }
 
-    let usersStartDate = new Date(startDate)
-    let usersEndDate = new Date(endDate)
+    let usersStartDate = new Date(booking.startDate)
+    let usersEndDate = new Date(booking.endDate)
     let today = new Date()
 
     if(today >= usersEndDate || today > usersStartDate){
@@ -170,7 +163,7 @@ router.put('/:bookingId', requireAuth, editingBookingChecker, async (req, res) =
 
         await editBooking.save()
 
-        res.json(editBooking)
+        return res.json(editBooking)
     }
 
     res.status(404)
