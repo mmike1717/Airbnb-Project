@@ -98,6 +98,12 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
 
 router.put('/:bookingId', requireAuth, editingBookingChecker, async (req, res) => {
     const booking = await Booking.findByPk(req.params.bookingId)
+    if(!booking){
+        res.status(404)
+        return res.json({
+            message: "Booking couldn't be found"
+        })
+    }
     const spot = await Spot.findOne({
         where: {
             id: booking.spotId
