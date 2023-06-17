@@ -105,6 +105,13 @@ router.put('/:bookingId', requireAuth, editingBookingChecker, async (req, res) =
         include: [Booking]
     })
 
+    if(!spot){
+        res.status(404)
+        return res.json({
+            message: "Booking couldn't be found"
+        })
+    }
+
     const currUser = req.user.dataValues.id
     const {startDate, endDate} = req.body
 
