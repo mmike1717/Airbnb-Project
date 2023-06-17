@@ -96,7 +96,7 @@ router.post('/:reviewId/images', requireAuth, addImageChecker, async (req, res) 
         })
     }
 
-    if(review.ReviewImages.length > 10){
+    if(review.ReviewImages.length > 9){
         res.status(403)
         return res.json({
             message: "Maximum number of images for this resource was reached"
