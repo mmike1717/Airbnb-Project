@@ -310,6 +310,13 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
         include: [Booking]
     })
 
+    if(!spot){
+        res.status(404)
+        return res.json({
+            message: "Spot couldn't be found"
+        })
+    }
+
     const { startDate, endDate } = req.body
 
     if(startDate >= endDate){
