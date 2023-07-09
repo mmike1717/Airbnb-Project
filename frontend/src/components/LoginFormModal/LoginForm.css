@@ -1,0 +1,41 @@
+.logInForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 8px;
+}
+
+#modal-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    height: fit-content;
+}
+
+.LogInErrors{
+    height: 35px;
+    display: flex;
+    align-items: center;
+}
+
+
+#logInHeader{
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+
+.inputBox{
+    width: 248px;
+}
+
+
+.LogInButton, .DemoUserButton{
+    width: 120px;
+    height: 28px;
+}
+
+.DemoUserButton{
+    margin-bottom: 20px;
+}

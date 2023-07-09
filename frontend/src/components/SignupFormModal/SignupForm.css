@@ -1,0 +1,23 @@
+#H1ForSignUp{
+    margin-bottom: 13px;
+}
+
+
+.SignUpFormPopup{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    margin-bottom: 22px;
+    max-width: 228px;
+}
+
+.SignUpInputs{
+    width: 220px;
+    height: 22px;
+}
+
+.SignUpErrors{
+    width: 206px;
+    margin-bottom: 12px;
+
+}

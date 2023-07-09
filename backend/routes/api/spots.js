@@ -109,8 +109,8 @@ router.get('/', getAllChecker, async (req, res) => {
             totalStars += review.stars
         })
         let avgRating1 = avgRatingArr.length > 0 ? totalStars / avgRatingArr.length : null
-        // let avgRating = Number.parseFloat(avgRating1).toFixed(1)
-        let avgRating = Math.round(avgRating1 * 100)/100
+        let avgRating = avgRating1 ? Number.parseFloat(avgRating1).toFixed(1) : 0
+        // let avgRating = Math.round(avgRating1 * 100)/100
 
 
 
@@ -260,6 +260,7 @@ router.get('/:spotId', async (req, res) => {
             totalStars += review.stars
         })
         let avgStarRating = totalStars / numReviews
+        avgStarRating = avgStarRating ? Number.parseFloat(avgStarRating).toFixed(1) : 0
 
         let SpotImages = await SpotImage.findAll({
             where: {

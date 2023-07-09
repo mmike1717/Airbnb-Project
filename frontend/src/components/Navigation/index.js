@@ -8,14 +8,16 @@ function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
-      </li>
+    <ul className='headerUl'>
+      <div>
+        <NavLink className='titleName' data-tooltip='Logo' exact to="/">BnB Getaway <i className="fa fa-car-side"/>  </NavLink>
+      </div>
       {isLoaded && (
-        <li>
+
+        <div>
+          <NavLink className='createSpotLink' exact to='/spots/new-spot'>Create A New Spot</NavLink>
           <ProfileButton user={sessionUser} />
-        </li>
+        </div>
       )}
     </ul>
   );

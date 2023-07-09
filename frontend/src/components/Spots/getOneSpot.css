@@ -1,0 +1,287 @@
+
+
+h2 {
+    font-size: xx-large;
+    margin-top: 15px;
+}
+
+.lineDiv {
+    border: 1px solid rgb(75, 130, 226);
+}
+
+
+.spotDetails {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 41px;
+}
+
+.spotLocation{
+    margin-bottom: 20px;
+}
+
+.hostedByDiv{
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+
+.detailsContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    max-height: fit-content;
+}
+
+.PicturesContainer{
+    display: flex;
+    max-width: 1024px;
+    height: 450px;
+    margin-bottom: 15px;
+}
+
+.firstPicture{
+    width: 464px;
+    height: 450px;
+    margin-right: 4px;
+}
+
+.AllOtherPics{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 4px;
+    column-gap: 4px;
+}
+
+.AllOtherPics > img{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 227px;
+    height: 223px;
+}
+
+.spotDescription {
+    max-width: 600px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+
+.reserveContainer {
+    width: 310px;
+    height: 125px;
+    border: 2px solid black;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 20px;
+}
+
+.priceAndStarCont {
+    display: flex;
+    justify-content: space-around;
+    padding: 0px 10px
+}
+
+
+.priceContainer {
+    display: flex;
+    width: 100px;
+    height: 35px;
+    align-items: flex-end;
+}
+
+.pricePerNight {
+    font-size: 27px;
+}
+
+.starRevDiv {
+    margin-left: 50px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.reviewReserveDiv {
+    display: flex;
+    align-items: flex-end;
+}
+
+.fa-star {
+    margin-right: 3px;
+    padding-bottom: 3px;
+}
+
+.reserveContainer > button {
+    width: 272px;
+    height: 37px;
+    box-shadow: 2px 2px 4px gray;
+    margin-left: 21px;
+    background-color: rgb(255, 106, 106);
+    color: white;
+    cursor: pointer;
+}
+
+
+.starReviewDiv2 {
+    display: flex;
+    margin: 20px 41px 13px
+}
+
+
+.starRevDiv2{
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.reviewReserveDiv2 {
+    font-size: 20px;
+}
+
+
+.dot {
+    display: flex;
+    align-items: flex-end;
+    font-size: 18px;
+}
+
+.dot2{
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+
+.reviewsContainer{
+    display: flex;
+    flex-direction: column;
+    margin: 20px 41px;
+    row-gap: 28px;
+}
+
+.eachReview {
+    display: flex;
+    flex-direction: column;
+    row-gap: 9px;
+}
+
+
+.reviewDate {
+    color: gray
+}
+
+.createReviewButtonForSpot{
+    margin-left: 40px;
+    padding: 4px 5px;
+    box-shadow: 1px 2px 3px;
+    background-color: rgb(255, 106, 106);
+    color: white;
+    cursor: pointer;
+}
+
+.CreateReviewForSpotButton{
+    display: flex;
+    margin-left: 41px;
+    padding: 7px 5px;
+    cursor: pointer;
+}
+
+.filled{
+    color: rgb(213, 44, 44);
+    /* background-color: aqua; */
+}
+
+.empty{
+    color: black;
+}
+
+.StarsContainer{
+    display: flex;
+    justify-content: center;
+    column-gap: 3px;
+}
+
+
+
+.ReviewTextContainer{
+    width: 250px;
+    height: 90px;
+}
+
+#RatingTitle{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0px;
+}
+
+.SubmitReviewButton{
+    display: flex;
+    margin: auto;
+    margin-top: 6px;
+    width: 255px;
+    height: 35px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: rgb(255, 106, 106);
+    cursor: pointer;
+    box-shadow: 1px 2px 3px;
+    margin-bottom: 15px;
+}
+
+.DisabledColorButton{
+    display: flex;
+    margin: auto;
+    margin-top: 6px;
+    width: 255px;
+    height: 35px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: darkgray;
+    cursor: default;
+    box-shadow: 1px 2px 3px;
+    margin-bottom: 20px;
+}
+
+.eachReview > button{
+    max-width: 70px;
+}
+
+.AllModalButton{
+    box-shadow: 1px 2px 3px;
+    cursor: pointer;
+}
+
+.Confirm-Delete-Review{
+    width: 283px;
+    height: 40px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    background-color: rgb(255, 106, 106);
+    color: white;
+}
+
+.Cancel-Delete-Review{
+    width: 283px;
+    height: 40px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    color: white;
+    background-color: rgb(131, 130, 130);
+}
+
+.Delete-Review-Title{
+    margin-bottom: 12px;
+}
+
+.SureDeleteReview{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 5px 20px;
+}

@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkGetAllSpots } from "../../store/spotsReducer";
+import { NavLink } from 'react-router-dom'
+import './getAllSpots.css'
 
-function GetAllSpots (){
+function GetAllSpots() {
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -10,19 +12,35 @@ function GetAllSpots (){
     }, [dispatch])
 
     const allSpots = useSelector(state => state.spots)
+    if (!allSpots || !Object.values(allSpots).length) return null
 
-    if(!Object.values(allSpots).length) return null
-    const spots = Object.values(allSpots)
-    // console.log(allSpots[0].name)
+
+    const spots = Object.values(allSpots.allSpots)
 
 
 
     return (
         <div>
-            <h2>hello</h2>
-            {spots.map((spot)=> {
-                return <div>{`${spot.name}`}</div>
-            })}
+            <div className="line"></div>
+            <nav className={'spotNavLink'}>
+                {spots.map((spot) => {
+                    return (
+                        <NavLink className='NavLinkCont' key={spot.id} to={`/details/${spot.id}`}>
+                            <div className="spotContainer" data-tooltip={`${spot.name}`}>
+                                <img className="allImages" src={`${spot.previewImage}`} />
+                                <div className='cityAndStars'>
+                                    <div className="cityState">{`${spot.city}`},  {`${spot.state}`}</div>
+                                    <div className="stars"><i className="fa-sharp fa-solid fa-star"></i> {!spot.avgRating ? `New` : `${spot.avgRating}`}</div>
+                                </div>
+                                <div className="price">{Number.parseFloat(spot.price).toFixed(2)} night</div>
+                            </div>
+                        </NavLink>
+
+                    )
+                })}
+
+            </nav>
+
         </div>
     )
 

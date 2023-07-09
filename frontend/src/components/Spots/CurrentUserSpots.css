@@ -1,0 +1,85 @@
+.CurrUserContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: auto;
+    height: fit-content;
+    row-gap: 45px;
+    column-gap: 10px;
+    padding: 45px 28px;
+    max-width: 1024px;
+}
+
+.CurrSpotContainer{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.CurrUserImages{
+    object-fit: cover;
+    width: 310px;
+    height: 205px;
+    border-radius: 20px;
+}
+
+.UserSpot-city-rating{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 6px;
+}
+
+
+.EditingButton{
+    margin-right: 10px;
+}
+
+.manage-Spots-Title{
+    margin: 30px 31px 0;
+}
+
+
+.CurrUserCreateButton{
+    margin: 10px 30px 0;
+}
+
+.Edit-Delete-Container{
+    margin: 8px 0 0 6px
+}
+
+.User-Edit-Delete-Button{
+    cursor: pointer;
+    box-shadow: 1px 2px 3px;
+}
+
+.AreYouSure{
+    display: flex;
+    padding: 0 15px;
+    margin-bottom: 21px;
+    flex-wrap: wrap;
+}
+
+
+.User-Delete-Button{
+    cursor: pointer;
+    margin-bottom: 10px;
+    width: 274px;
+    height: 80px;
+    color: white;
+    background-color: rgb(255, 106, 106);
+}
+
+.Cancel-Spot-Delete{
+    cursor: pointer;
+    margin-bottom: 10px;
+    width: 274px;
+    height: 80px;
+    background-color: rgb(201, 195, 195);
+}
+
+
+.Confirm-Delete-Spot{
+    margin-bottom: 5px;
+}

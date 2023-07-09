@@ -1,0 +1,102 @@
+.allImages {
+    object-fit: cover;
+    width: 310px;
+    height: 205px;
+    border-radius: 20px;
+}
+
+.spotNavLink {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: auto;
+    height: fit-content;
+    row-gap: 45px;
+    column-gap: 10px;
+    padding: 45px 28px;
+    max-width: 1024px;
+}
+
+.line{
+    border: rgb(75, 130, 226) solid 1px;
+}
+
+.cityAndStars {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 6px;
+}
+
+.price {
+    padding: 0 6px;
+}
+
+
+.spotContainer {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    position: relative;
+}
+
+
+.NavLinkCont{
+    text-decoration: none;
+    color: black;
+}
+
+
+.spotContainer::before,
+.spotContainer::after{
+    --scale: 0;
+
+    position: absolute;
+    top: -.25rem;
+    left:50%;
+    transform: translate(-50%) translateY(-100%) scale(var(--scale));
+    transition: 150ms transform;
+    transform-origin: bottom center;
+}
+
+.spotContainer::before {
+    content: attr(data-tooltip);
+    color: white;
+    padding: .5rem;
+    border-radius: .3rem;
+    text-align: center;
+    width: max-content;
+    max-width: 100%;
+    background-color: #333;
+}
+
+
+.spotContainer:hover::before{
+    --scale: 1
+}
+/* .SpotName{
+    position: relative;
+    left: 100px;
+    top: 125px;
+    width: 150px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 1;
+    background-color: gray;
+    color: white;
+} */
+
+/* .spotContainer:hover{
+    background: gray;
+    border-radius: 5px;
+
+} */
+
+/* .SpotName::after {
+    background-color: gray;
+}
+
+.SpotName:hover{
+    visibility: visible;
+    opacity: 1;
+} */
