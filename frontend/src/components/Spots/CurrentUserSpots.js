@@ -52,7 +52,7 @@ export default function CurrUserSpots() {
                                 <img className='CurrUserImages' src={spot.previewImage} />
                                 <div className='UserSpot-city-rating'>
                                     <div>{spot.city}, {spot.state}</div>
-                                    <div> <i className='fa fa-star' /> {!spot.avgRating ? `New` : `${spot.avgRating}`}</div>
+                                    <div> <i className='fa fa-star' /> {!spot.avgRating ? `New` : `${Number.parseFloat(spot.avgRating).toFixed(1)}`}</div>
                                 </div>
                                 <div className='price'>${Number.parseFloat(spot.price).toFixed(2)} night</div>
                             </NavLink>

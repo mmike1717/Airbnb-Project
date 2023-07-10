@@ -16,7 +16,7 @@ export default function GetOneSpotDetails() {
     const {closeModal} = useModal()
     const dispatch = useDispatch()
 
-    const [createReviewButton, setCreateReviewButton] = useState(true)
+    // const [createReviewButton, setCreateReviewButton] = useState(true)
     useEffect(() => {
         dispatch(thunkGetOneSpot(spotId))
     }, [dispatch, spotId])

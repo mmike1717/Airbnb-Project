@@ -21,7 +21,7 @@ const EditSpotForm = () => {
     func()
   },[dispatch, spotId])
 
-  console.log(spotData)
+  // console.log(spotData)
   // const spotData = useSelector(state => state.spots.singleSpot)
 
   if(!Object.values(spotData).length) return null

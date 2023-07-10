@@ -158,7 +158,7 @@ router.get('/current', async (req, res) => {
 
         let totalStars = 0
         const avgRatingArr = spot.Reviews.map((review) => {
-            totalStars += review.stars
+            totalStars += parseInt(review.stars)
         })
         let avgRating1 = avgRatingArr.length > 0 ? totalStars / avgRatingArr.length : null
         let avgRating = Math.round(avgRating1 * 100)/100
