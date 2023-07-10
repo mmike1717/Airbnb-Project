@@ -58,13 +58,14 @@
 }
 
 .menuButton{
-    height: 30px;
-    width: 50px;
+    height: 33px;
+    width: 55px;
     padding: 0;
     color: rgb(75, 130, 226);
     border: solid 2px rgb(75, 130, 226);;
     cursor: pointer;
     position: relative;
+    border-radius: 20px;
 }
 
 .menuButton::before,

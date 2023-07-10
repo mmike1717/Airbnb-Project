@@ -8,17 +8,21 @@ import { thunkGetEditSpot } from "../../store/spotsReducer";
 const EditSpotForm = () => {
     const dispatch = useDispatch()
   const { spotId } = useParams();
-  // const [spotData, setSpotData] = useState({})
+  const [spotData, setSpotData] = useState({})
 
   const title = 'Update Your Spot'
   // let spotData;
   useEffect(() => {
-    dispatch(thunkGetEditSpot(spotId))
-    // .then((res)=> {setSpotData(res)})
+    const func = async () => {
+      const res = await dispatch(thunkGetEditSpot(spotId))
+      // .then((res)=> {setSpotData(res)})
+      setSpotData(res)
+    }
+    func()
   },[dispatch, spotId])
 
-  // console.log(spotData)
-  const spotData = useSelector(state => state.spots.singleSpot)
+  console.log(spotData)
+  // const spotData = useSelector(state => state.spots.singleSpot)
 
   if(!Object.values(spotData).length) return null
 

@@ -25,31 +25,33 @@ export default function SpotForm({ spotData, formType, title }) {
     const [image4, setImage4] = useState('')
     const dispatch = useDispatch()
     const [errors, setErrors] = useState({})
-    const [imageErrors, setImageErrors] = useState({})
-    const [submited, setSubmited] = useState(false)
+    // const [imageErrors, setImageErrors] = useState({})
+    // const [submited, setSubmited] = useState(false)
     const history = useHistory()
 
 
-    useEffect(() => {
-        const err = {}
-        setErrors({})
-        if (!address.length) err.address = 'Address is required'
-        if (!city.length) err.city = 'City is required'
-        if (!state.length) err.state = "Must have a valid state"
-        if (!country.length) err.country = "Must have a valid country"
-        if (!name.length) err.name = "Must have a valid name"
-        if (description.length < 30) err.description = "Description needs 30 or more characters"
-        if (price < 1) err.price = "Must have a valid price"
-        if (formType === 'Create Spot' && !preview.length) err.preview = 'Preview image is required'
-        // if(formType === 'Edit Form' && spotData)
+    // useEffect(() => {
+    //     const err = {}
+    //     setErrors({})
+    //     // console.log('errrrrr----', submited)
+    //     if (!address.length) err.address = 'Address is required'
+    //     if (!city.length) err.city = 'City is required'
+    //     if (!state.length) err.state = "Must have a valid state"
+    //     if (!country.length) err.country = "Must have a valid country"
+    //     if (!name.length) err.name = "Must have a valid name"
+    //     if (description.length < 30) err.description = "Description needs 30 or more characters"
+    //     if (price < 1) err.price = "Must have a valid price"
+    //     if (formType === 'Create Spot' && !preview.length) err.preview = 'Preview image is required'
+    //     // if(formType === 'Edit Form' && spotData)
 
-        // if (url) { errors.url = "Must have a valid url" }
-        // if(Object.values(err).length) setSubmited(true)
-        if (submited) {
-            setErrors(err);
-        }
+    //     // if (url) { errors.url = "Must have a valid url" }
+    //     // if(Object.values(err).length) setSubmited(true)
+    //     if (submited) {
+    //         setErrors(err);
+    //     }
+    //     // setSubmited(true)
 
-    }, [submited, address, city, state, country, name, description, price, preview]);
+    // }, [submited, address, city, state, country, name, description, price, preview]);
 
 
     // //     if (!previewImage.endsWith('.jpg'))
@@ -83,13 +85,26 @@ export default function SpotForm({ spotData, formType, title }) {
     }
 
     const handleSubmit = async (e) => {
-
         e.preventDefault()
-        setSubmited(true)
+
+
+        setErrors({})
+        const err = {}
+        if (!address.length) err.address = 'Address is required'
+        if (!city.length) err.city = 'City is required'
+        if (!state.length) err.state = "Must have a valid state"
+        if (!country.length) err.country = "Must have a valid country"
+        if (!name.length) err.name = "Must have a valid name"
+        if (description.length < 30) err.description = "Description needs 30 or more characters"
+        if (price < 1) err.price = "Must have a valid price"
+        if (formType === 'Create Spot' && !preview.length) err.preview = 'Preview image is required'
+        if(formType === 'Create Spot' && (image1.endsWith('.png') || image1.endsWith('.jpg') || image1.endsWith('.jpeg'))) err.image1 = 'Image URL must end in .png, .jpg, or .jpeg'
+        setErrors(err);
+        // setSubmited(true)
 
         let newSpot = { ...spotData, address, city, state, country, lat, lng, name, description, price }
 
-        if (formType === 'Create Spot' && !Object.values(errors).length && submited) {
+        if (formType === 'Create Spot' && !Object.values(err).length) {
 
             //if you want to refactor chain thunks together
             newSpot = await dispatch(thunkCreateASpot(newSpot))
@@ -101,8 +116,8 @@ export default function SpotForm({ spotData, formType, title }) {
 
         }
 
-        console.log('errors', errors)
-        if (formType === 'Edit Form' && !Object.values(errors).length && submited) {
+        // console.log('errors', errors)
+        if (formType === 'Edit Form' && !Object.values(err).length) {
             newSpot = await dispatch(thunkEditASpot(newSpot))
                 .then(history.push(`/details/${newSpot.id}`))
         }
@@ -225,7 +240,7 @@ export default function SpotForm({ spotData, formType, title }) {
                                 onChange={(e) => setImage1(e.target.value)}
                                 type="url"
                             />
-                            <div>{imageErrors.image1}</div>
+                            <div>{errors.image1}</div>
                             <input
                                 placeholder='Image URL'
                                 className='imageInput'
