@@ -10,7 +10,10 @@ function Navigation({ isLoaded }){
   return (
     <ul className='headerUl'>
       <div>
-        <NavLink className='titleName' data-tooltip='Logo' exact to="/">BnB Getaway <i className="fa fa-car-side"/>  </NavLink>
+        <NavLink className='titleName' data-tooltip='Logo' exact to="/"> <i className="fa-brands fa-airbnb"/> BnB Getaway</NavLink>
+      </div>
+      <div>
+
       </div>
       {isLoaded && (
 

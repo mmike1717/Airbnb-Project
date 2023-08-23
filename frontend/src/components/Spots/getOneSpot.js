@@ -7,6 +7,8 @@ import './getOneSpot.css'
 import CreateNewReview from '../Reviews/CreateNewReview'
 import ModalReview from '../Delete/ModalReview'
 import { useModal } from "../../context/Modal";
+import CreateBookingModal from '../CreateBooking/ModalCreateBooking'
+import CreateBooking from '../CreateBooking/createBooking'
 
 
 
@@ -84,7 +86,8 @@ export default function GetOneSpotDetails() {
                             <div className='dot'>{spot.numReviews !== 0 ? '·' : null}</div>
                             <div className='reviewReserveDiv'>{spot.numReviews === 1 ? `${spot.numReviews} Review` : spot.numReviews !== 0 ? `${spot.numReviews} Reviews`  : 'New'}</div>
                         </div>
-                        <button onClick={() => alert('Feature Coming Soon')}>Reserve</button>
+                        {/* <button onClick={() => alert('Feature Coming Soon')}>Reserve</button> */}
+                        <CreateBookingModal buttonText={'Reserve'} modalComponent={<CreateBooking spotId={spotId} />} />
                     </div>
                 </div>
             </div>

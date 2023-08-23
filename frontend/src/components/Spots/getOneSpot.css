@@ -116,7 +116,17 @@ h2 {
     padding-bottom: 3px;
 }
 
-.reserveContainer > button {
+/* .reserveContainer > button {
+    width: 272px;
+    height: 37px;
+    box-shadow: 2px 2px 4px gray;
+    margin-left: 21px;
+    background-color: rgb(255, 106, 106);
+    color: white;
+    cursor: pointer;
+} */
+
+.ReserveButton{
     width: 272px;
     height: 37px;
     box-shadow: 2px 2px 4px gray;

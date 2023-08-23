@@ -53,6 +53,7 @@ function ProfileButton({ user }) {
             <div className="UserLogInInfo"> Hello, {user.firstName}</div>
             <div className="UserLogInInfo">{user.email}</div>
             <Link onClick={closeMenu} className='ManageSpotLink' exact='true' to='/your-spots'>Manage Spots</Link>
+            <Link onClick={closeMenu} className='ManageSpotLink' exact='true' to='/your-bookings'>Manage Bookings</Link>
             <div className="LogOutButtonDiv">
               <button onClick={logout}>Log Out</button>
             </div>

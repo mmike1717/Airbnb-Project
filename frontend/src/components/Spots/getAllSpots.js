@@ -20,8 +20,19 @@ function GetAllSpots() {
 
 
     return (
+        <>
+            {/* <div className="MainPictureContainer">
+                <img className="HomePagePicture" src="https://www.thoughtco.com/thmb/xsXofufWyqkNhc1MZwQqtm9ivNY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/empire-state-building-and-skyline--new-york--usa-668600163-5aabde2843a1030036f90d9a.jpg"/>
+                <img className="HomePagePicture" src="https://media.istockphoto.com/id/1141114423/photo/chicago-skyline-aerial-drone-view-from-above-lake-michigan-and-city-of-chicago-downtown.jpg"/>
+                <div className="LargePictureTitle">Welcome to BnB Getaway</div>
+                <div className="MainSearchContainer">
+                    <div>Anywhere</div>
+                    <div>Any week</div>
+                    <div>Add guests</div>
+                    <div><i class="fa-solid fa-magnifying-glass"/></div>
+                </div>
+            </div> */}
         <div>
-            <div className="line"></div>
             <nav className={'spotNavLink'}>
                 {spots.map((spot) => {
                     return (
@@ -42,6 +53,7 @@ function GetAllSpots() {
             </nav>
 
         </div>
+        </>
     )
 
 }

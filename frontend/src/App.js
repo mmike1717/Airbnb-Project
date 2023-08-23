@@ -11,6 +11,7 @@ import GetOneSpotDetails from "./components/Spots/getOneSpot";
 import CurrUserSpots from "./components/Spots/CurrentUserSpots";
 import CreateNewReview from "./components/Reviews/CreateNewReview";
 import DeleteReview from "./components/Delete/DeleteReview";
+import ManageUserBookings from "./components/GetUserBooking/getUserBookings";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,9 @@ function App() {
         </Route>
         <Route exact path={'/your-spots'}>
           <CurrUserSpots />
+        </Route>
+        <Route exact path={'/your-bookings'}>
+          <ManageUserBookings />
         </Route>
         <Route exact path={'/newReview/:spotId'}>
           <CreateNewReview />

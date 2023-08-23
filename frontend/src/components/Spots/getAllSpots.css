@@ -8,18 +8,48 @@
 .spotNavLink {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
     margin: auto;
+    height: -moz-fit-content;
     height: fit-content;
     row-gap: 45px;
-    column-gap: 10px;
+    column-gap: 14px;
     padding: 45px 28px;
-    max-width: 1024px;
 }
 
 .line{
-    border: rgb(75, 130, 226) solid 1px;
+    border: lightgray solid 1px;
 }
+
+
+.MainPictureContainer{
+    position: relative;
+}
+
+
+.HomePagePicture{
+    width: -webkit-fill-available;
+    height: 645px;
+    /* position: relative; */
+
+
+}
+
+
+.MainSearchContainer{
+    display: flex;
+    width: 350px;
+    justify-content: space-between;
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    padding: 12px;
+    border-radius: 24px;
+    position: absolute;
+    top: 71%;
+    left: 36%;
+}
+
 
 .cityAndStars {
     display: flex;
