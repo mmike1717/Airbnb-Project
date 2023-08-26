@@ -119,7 +119,7 @@ router.put('/:bookingId', requireAuth, editingBookingChecker, async (req, res) =
         res.status(400)
         return res.json({
             message: "Bad Request",
-            errors: {endDate: "endDate cannot come before startDate"}
+            errors: {endDate: "End date cannot come before Start date"}
         })
     }
 

@@ -414,3 +414,9 @@ h2 {
     flex-wrap: wrap;
     margin: 0 5px 20px;
 }
+
+
+.EditDeleteReviewButtons{
+    display: flex;
+    column-gap: 10px;
+}

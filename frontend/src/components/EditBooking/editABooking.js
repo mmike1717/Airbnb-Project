@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import { useModal } from "../../context/Modal";
 import { thunkEditASingleBooking, thunkGetSingleSpotBookings, thunkGetUsersBookings } from '../../store/bookings';
+import './editcss.css'
 
 
 
@@ -14,6 +15,7 @@ export default function EditABooking({startDate, endDate, spotId, bookingId}) {
     const dispatch = useDispatch()
     const [editStartDate, setEditStartDate] = useState(new Date(startDate));
     const [editEndDate, setEditEndDate] = useState(new Date(endDate));
+    const [error, setError] = useState({})
     const {closeModal} = useModal()
 
 
@@ -35,20 +37,31 @@ export default function EditABooking({startDate, endDate, spotId, bookingId}) {
     }))
 
 
-    const handleClick = () => {
+    const handleClick = async() => {
+        setError({})
         const dates = {
             startDate: editStartDate,
             endDate: editEndDate
         }
-        dispatch(thunkEditASingleBooking(bookingId, dates))
-        .then(() => dispatch(thunkGetUsersBookings()))
-        .then(closeModal)
+
+        let editRes = await dispatch(thunkEditASingleBooking(bookingId, dates))
+
+        if(editRes.errors){
+            setError({editerr: Object.values(editRes.errors)})
+        }
+        else{
+            dispatch(thunkGetUsersBookings())
+            .then(closeModal)
+
+        }
     }
 
 
     return (
 
-        <>
+        <div className='DivHoldingEditText'>
+            <div className='TitleForEdit'>Edit your Reservation</div>
+            <div>{error.editerr && <div className='EditErrorDiv'>{error.editerr}</div>}</div>
             <DatePicker
                 showIcon={true}
                 selected={editStartDate}
@@ -71,8 +84,11 @@ export default function EditABooking({startDate, endDate, spotId, bookingId}) {
                 excludeDateIntervals={dateRanges}
                 monthsShown={2}
             />
-            <button onClick={() => handleClick()}>Edit Reservation</button>
-        </>
+            <div className='DivHoldingEditButtons'>
+                <button className='EditButtonInsideModal' onClick={() => handleClick()}>Edit Reservation</button>
+                <button className='EditButtonInsideModal' onClick={closeModal}>Cancel</button>
+            </div>
+        </div>
 
     )
 }

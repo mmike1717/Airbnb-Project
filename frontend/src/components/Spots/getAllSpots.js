@@ -32,6 +32,7 @@ function GetAllSpots() {
                     <div><i class="fa-solid fa-magnifying-glass"/></div>
                 </div>
             </div> */}
+        <div className='line'></div>
         <div>
             <nav className={'spotNavLink'}>
                 {spots.map((spot) => {

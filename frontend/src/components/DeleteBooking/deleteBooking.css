@@ -1,0 +1,28 @@
+
+
+.DivHoldingDeleteInfo{
+    width: 300px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 12px;
+}
+
+
+.AreYouSureDelete{
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.BookingDeleteButtons{
+    width: 120px;
+    height: 32px;
+    border-radius: 9px;
+    border: none;
+    box-shadow: 0px 0px 5px 1px;
+    cursor: pointer;
+}

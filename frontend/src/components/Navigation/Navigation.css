@@ -8,7 +8,7 @@
     right: 44px;
     background-color: rgb(238, 233, 233);
     padding: 15px 3px 15px 3px;
-    border: 1px solid rgb(75, 130, 226);
+    border: 1px solid gray;
     z-index: 99;
 }
 
@@ -121,8 +121,7 @@
     color: black;
     height: 27px;
     align-items: center;
-    border-bottom: solid rgb(75, 130, 226);
-    border-top: solid rgb(75, 130, 226);
+    border-top: solid gray;
     margin: 5px 0;
     width: 135px;
     justify-content: center;

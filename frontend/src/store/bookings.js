@@ -55,7 +55,7 @@ export const thunkEditASingleBooking = (bookingId, dates) => async (dispatch) =>
         }
     } catch (e) {
         const err = await e.json()
-        console.log(err, '---------')
+        // console.log(err, '---------')
         return err
     }
 }

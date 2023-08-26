@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf"
 const REVIEWS_BY_SPOT_ID = 'reviews/BY_SPOT_ID'
 const CREATE_NEW_REVIEW = 'reviews/CREATE_NEW'
 const DELETE_A_REVIEW = 'reviews/DELETE'
+const EDIT_A_REVIEW = 'reviews/EDIT'
 
 const actionReviewsSpotId = (reviews) => ({
     type: REVIEWS_BY_SPOT_ID,
@@ -20,6 +21,11 @@ const actionCreateNewReview = (review) => ({
 const actionDeleteAReview = (id) => ({
     type: DELETE_A_REVIEW,
     id
+})
+
+const actionEditAReview = (data) => ({
+    type: EDIT_A_REVIEW,
+    data
 })
 
 
@@ -70,6 +76,24 @@ export const thunkDeleteReview = (reviewId) => async (dispatch) => {
 
 
 
+export const thunkEditAReview = (reviewId, data) => async (dispatch) => {
+    try{const res = await csrfFetch(`/api/reviews/${reviewId}`, {
+        method: 'PUT',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(data)
+    })
+    if(res.ok){
+        const result = await res.json()
+        dispatch(actionEditAReview(result))
+        return result
+    }} catch (e) {
+        const error = e.json()
+        return error
+    }
+}
+
+
+
 
 const initialState = {
     spot: {},
@@ -96,6 +120,9 @@ export default function reviewsReducer (state = initialState, action){
             const newState = { ...state, spot:{...state.spot} }
             delete newState.spot[action.id]
             return newState
+        }
+        case EDIT_A_REVIEW: {
+            return { ...state, spot: { [action.data.id]: action.data }}
         }
         default:
             return state
