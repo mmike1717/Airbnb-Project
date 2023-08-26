@@ -1,0 +1,78 @@
+
+
+.TripTitle{
+    width: 850px;
+    margin: 30px auto;
+    font-size: 30px;
+}
+
+.upcomingrestitle{
+    width: 850px;
+    margin: auto;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+
+.EachBookingMainContainer{
+    display: flex;
+    width: 850px;
+    box-shadow: 0px 0px 8px 4px lightgray;
+    margin: auto;
+    margin-bottom: 70px;
+    height: 282px;
+}
+
+.BookingInfoText{
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+}
+
+.NameOfBooking{
+    font-size: 22px;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+.DatesAndAddressBooking{
+    display: flex;
+    padding: 20px;
+    margin: 15px 0px;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+}
+
+.UserBookingAddress{
+    width: 200px;
+    padding-left: 35px;
+}
+
+.UserBookingDates{
+    width: 100px;
+    border-right: 1px solid lightgray;
+}
+
+
+.divHoldingButtons{
+    height: 67px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 19px;
+}
+
+
+.ButtonInsideDiv{
+    width: 150px;
+    height: 40px;
+    border-radius: 9px;
+    border: none;
+    box-shadow: 0px 0px 12px 1px;
+    cursor: pointer;
+}
+
+
+.eachBookingImg{
+    width: 500px;
+}

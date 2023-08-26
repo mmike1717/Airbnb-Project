@@ -1,4 +1,9 @@
 
+.MainContainerHoldingEverything{
+    max-width: 1200px;
+    margin: auto;
+}
+
 
 h2 {
     font-size: xx-large;
@@ -6,14 +11,15 @@ h2 {
 }
 
 .lineDiv {
-    border: 1px solid rgb(75, 130, 226);
+    border: 1px solid lightgray;;
 }
 
 
 .spotDetails {
     display: flex;
     flex-direction: column;
-    margin: 10px 41px;
+    margin: 20px auto;
+    max-width: 1200px;
 }
 
 .spotLocation{
@@ -22,7 +28,8 @@ h2 {
 
 .hostedByDiv{
     font-size: 24px;
-    margin-bottom: 20px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid lightgray;
 }
 
 
@@ -36,15 +43,15 @@ h2 {
 
 .PicturesContainer{
     display: flex;
-    max-width: 1024px;
-    height: 450px;
+    max-width: 1200px;
+    height: 500px;
     margin-bottom: 15px;
 }
 
 .firstPicture{
-    width: 464px;
-    height: 450px;
-    margin-right: 4px;
+    width: 55%;
+    height: 101%;
+    margin-right: 10px;
 }
 
 .AllOtherPics{
@@ -59,22 +66,110 @@ h2 {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    max-width: 227px;
-    height: 223px;
+    max-width: 49%;
+    height: 50%;
 }
 
 .spotDescription {
-    max-width: 600px;
+    max-width: 650px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    padding: 50px 50px 50px 0px;
+    margin-top: 30px;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    font-size: 17px;
+    line-height: 23px;
+}
+
+
+.AllDetailsOnLeftContainer{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    width: 700px;
+}
+
+
+.IconAndTextDescribeAnem{
+    display: flex;
+    margin-top: 20px;
+    column-gap: 15px;
+}
+
+
+.DivHoldingIcon{
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+}
+
+.DescriptionTitleText{
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.TextBelowTitle{
+    display: flex;
+    flex-wrap: wrap;
+    width: 650px;
+}
+
+
+.WhatOffersTitle{
+    font-size: 25px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+
+}
+
+
+.ContainerHoldingAllOffers{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 210px;
+    row-gap: 22px;
+
+}
+
+
+.DivWithIconAndAmen{
+    font-size: 21px;
+}
+
+.icon{
+    margin-right: 12px;
+}
+
+
+.DivHoldingCalendar{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+
+.ContainerHoldingAllReserveInfo{
+    position: sticky;
+    top: 28%;
+    display: flex;
+    flex-direction: column;
+    height: 270px;
+    width: 350px;
+    border: 1px solid lightgray;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 13px 2px lightgray;
 }
 
 
 .reserveContainer {
-    width: 310px;
-    height: 125px;
-    border: 2px solid black;
+    width: -webkit-fill-available;
+    height: 115px;
+    border: 1px solid black;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
@@ -82,18 +177,32 @@ h2 {
     row-gap: 20px;
 }
 
+.react-datepicker-wrapper{
+    width: 171px
+}
+
+
+.SelectContainerForGuests{
+    width: 349px;
+    padding: 12px;
+    border-top: none;
+    margin-bottom: 40px;
+}
+
 .priceAndStarCont {
     display: flex;
-    justify-content: space-around;
-    padding: 0px 10px
+    padding: 0px 10px;
+    column-gap: 5px;
+    margin-bottom: 30px;
 }
 
 
 .priceContainer {
     display: flex;
-    width: 100px;
+    width: 120px;
     height: 35px;
     align-items: flex-end;
+    margin-right: auto;
 }
 
 .pricePerNight {
@@ -101,7 +210,6 @@ h2 {
 }
 
 .starRevDiv {
-    margin-left: 50px;
     display: flex;
     align-items: flex-end;
 }
@@ -127,13 +235,24 @@ h2 {
 } */
 
 .ReserveButton{
-    width: 272px;
-    height: 37px;
+    width: 289px;
+    height: 42px;
     box-shadow: 2px 2px 4px gray;
     margin-left: 21px;
-    background-color: rgb(255, 106, 106);
+    background-color: #ff385c;
     color: white;
     cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 7px;
+}
+
+
+.WontBeChargedText{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+
 }
 
 

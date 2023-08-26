@@ -127,10 +127,10 @@ router.put('/:bookingId', requireAuth, editingBookingChecker, async (req, res) =
     let bookings = spot.Bookings
     bookings.forEach((booking) => {
         let eachBooking = booking.toJSON()
-        if(eachBooking.startDate <= startDate && eachBooking.endDate >= startDate){
+        if(eachBooking.startDate <= startDate && eachBooking.endDate >= startDate && eachBooking.userId !== currUser){
             errors.startDate = "Start date conflicts with an existing booking"
         }
-        if(eachBooking.startDate <= endDate && eachBooking.endDate >= endDate){
+        if(eachBooking.startDate <= endDate && eachBooking.endDate >= endDate && eachBooking.userId !== currUser){
             errors.endDate = "End date conflicts with an existing booking"
         }
     })
