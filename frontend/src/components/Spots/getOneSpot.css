@@ -322,6 +322,7 @@ h2 {
 
 .filled{
     color: rgb(213, 44, 44);
+    cursor: pointer;
     /* background-color: aqua; */
 }
 
