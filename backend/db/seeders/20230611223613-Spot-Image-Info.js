@@ -84,27 +84,27 @@ module.exports = {
       },
       {
         spotId: 4,
-        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-582483711874571222/original/20667954-5818-49cd-af34-fdec04945892.jpeg',
+        url: 'https://cdn.captivatinghouses.com/wp-content/uploads/2022/03/IMG_1224.jpg',
         preview: true
       },
       {
         spotId: 4,
-        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-582483711874571222/original/9c6ed119-7e04-4b9c-925b-800615aa277d.jpeg',
+        url: 'https://static01.nyt.com/images/2021/01/31/realestate/28OTM-NYC-slide-HLHO/28OTM-NYC-slide-HLHO-articleLarge.jpg',
         preview: true
       },
       {
         spotId: 4,
-        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-582483711874571222/original/a984b2ce-5230-45e8-8542-94b4f457abb6.jpeg',
+        url: 'https://photos.zillowstatic.com/fp/24fcd64924e745cbd3b1d2232067a0d7-cc_ft_1536.jpg',
         preview: true
       },
       {
         spotId: 4,
-        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-582483711874571222/original/a1aa9a68-6303-432e-a945-bf6eb59d328c.jpeg',
+        url: 'https://i.ytimg.com/vi/xCdhQFgQc5o/maxresdefault.jpg',
         preview: true
       },
       {
         spotId: 4,
-        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-582483711874571222/original/c1faa7ab-f78d-440a-9ab1-b7b77cfe88df.jpeg',
+        url: 'https://global-uploads.webflow.com/5e41b446a7ff3206df92bc7a/626065a10682101e2f00533d_IND_255_Sherman_Street_Brooklyn_NY_Studio_-_5_Photos_5_20211206-105114-min.jpg',
         preview: true
       },
       {
