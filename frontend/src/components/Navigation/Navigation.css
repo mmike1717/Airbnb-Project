@@ -157,7 +157,7 @@
     display: flex;
     justify-content: flex-start;
     height: 25px;
-    border-bottom: solid rgb(75, 130, 226) 1px;
+    border-bottom: solid grey 1px;
     width: 100px;
     margin: 0;
     padding-left: 5px;
